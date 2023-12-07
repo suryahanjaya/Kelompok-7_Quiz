@@ -135,7 +135,7 @@ void random_question()
             cout << "Soal: " << question_no << " untuk " << question_value << "koin" << "\t\t\t\tBalance =" << cash << "koin" << endl;
             cout << "Nyawa:" ;
             if(pay_half_skip)
-                cout << "\th=>PAY HALF AND SKIP";
+                cout << "\th=>PAY HALF dan SKIP";
             if(skip)
                 cout << "\tl=>LEAVE QUESTION" ;
             cout << endl << endl;
@@ -239,9 +239,23 @@ void hasil()
 void rules();
 {
     cout << "=====================================================" << endl;
-    cout << "=================== RULES THE GAME ==================" << endl;
+    cout << "====================== PERATURAN ====================" << endl;
     cout << "=====================================================" << endl;
-    cout << "=====================================================" << endl;
+    cout << " 01. Ada 10 soal di program ini." << endl << endl;
+    cout << " 02. Hanya ada 2 kesempatan di setiap stage" << endl << endl;
+    cout << " 03. Pay HALF dan SKIP artinya kamu harus bayar 1/4% dari soal yang sedang berlangsung" << endl << endl;
+    cout << " 04. Leave Question artinya kamu bisa meninggalkan pertanyaan tanpa adanya deduksi" << endl << endl;
+    cout << " 05. Jika kamu benar 3 beruntun Pay HALF dan SKIP akan diselamatkan" << endl << endl;
+    cout << " 06. Jika kamu benar 5 beruntun Leave Questio akan diselamatkan" << endl << endl;
+    cout << " 07. Setelah semua pertanyaan, jumlah pertanyaan akan didouble" << endl << endl;
+    cout << " 08. Jika jawaban salah, 1/2 dari nilai pertanyaan akan mengurangi balance koin anda" << endl << endl;
+    cout << " 09. Tekan H untuk Pay HALF dan SKIP" << endl << endl;
+    cout << " 10. Tekan L untuk Leave Question" << endl << endl;
+    cout << " 11. Tekan A / B / C / D untuk menjawab pertanyaan" << endl << endl;
+    cout << " ===================================================== " << endl:
+    cout << " ============= PRESS ANY KEY TO CONTINUE ============= " << endl;
+    cout << " ===================================================== " << endl:
+    _getch();
 }
 
 
