@@ -8,4 +8,4 @@ Kelompok 7:
 - 23051204032_JOVITA AULIYA DUROTUNNASHAH	
 
 Program Overview:
-
+a simple quiz where the player answers questions, earns or loses points based on their answers, and can use special features like "pay half and skip" or "leave question" under certain conditions. The final results are stored in a file.
