@@ -1,4 +1,11 @@
-# PEMDAS_S1_FinalProject
+# Kelompok 7_QUIZ
 
-- create QUIZ code
-- create Login & Registration fomr
+FINAL PROJECT Pemograman Dasar 
+Kelas TI A 23
+Kelompok 7:
+- 23051204007_SURYA HANJAYA	
+- 23051204023_NATASYAH SALSABILLAH WIBISONO	
+- 23051204032_JOVITA AULIYA DUROTUNNASHAH	
+
+Program Overview:
+
