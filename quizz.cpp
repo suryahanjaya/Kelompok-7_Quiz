@@ -1,24 +1,18 @@
 #include <iostream>
 #include <ctime>
-#include <conio.h> 
-using namespace std;
+#include <conio.h>
+#include <string>
+#include <fstream>
 
-string player;
-bool pay_half_skip   = true;
-bool skip            = true;
-long cash            = 0;
-long question_value  = 100;
-int consective       = 0;
-int jawaban_benar    = 0;
-int jawaban_salah    = 0;
-int question_no      = 1;
+using namespace std;
 
 void hasil();
 void rules();
 void random_question();
 void cek_jawaban(char jawaban, char JawabanBenar);
+void saveResultsToFile();
 
-struct Question{
+struct Question {
     string soal;
     string opsi_a;
     string opsi_b;
@@ -27,7 +21,18 @@ struct Question{
     char jawaban;
     bool availability;
 };
+
 Question questions[10];
+string player;
+bool pay_half_skip = true;
+bool skip = true;
+long cash = 0;
+long question_value = 100;
+int consective = 0;
+int jawaban_benar = 0;
+int jawaban_salah = 0;
+int question_no = 1;
+
 int main()
 {
     system("cls");
@@ -93,7 +98,7 @@ int main()
     "bening",
     "coklat",
     'a', true };
-    
+
     questions[9] = {"Kapan unesa didirikan?" ,
     "19 Desember 1967",
     "19 Desember 1964",
@@ -101,33 +106,31 @@ int main()
     "19 November 1964",
     'b', true };
 
-    cout << "=====================================================" << endl;
-    cout << "================== WELCOME TO THE ===================" << endl;
-    cout << "================== J2n GAME SHOW ====================" << endl;
-    cout << "=====================================================" << endl;
+    std::cout << "=====================================================" << std::endl;
+    std::cout << "================== WELCOME TO THE ===================" << std::endl;
+    std::cout << "================== J2n GAME SHOW ====================" << std::endl;
+    std::cout << "=====================================================" << std::endl;
     cout << "Ketik Jenengmu!: ";
     getline(cin, player);
     system("cls");
     rules();
-    while (true)
-    {
-        if(question_no > 10)
+
+    while (true) {
+        if (question_no > 10)
             break;
-        random_question();   
+        random_question();
     }
     hasil();
+    saveResultsToFile();
     return 0;
-
 }
 
-void random_question()
-{
+void random_question() {
     srand(time(0));
-    while (true)
-        {
+    while (true) {
         system("cls");
-        int number = rand()%10;
-        if(questions[number].availability)
+        int number = rand() % 10;
+        if (questions[number].availability) {
             questions[number].availability = false;
             cout << "=====================================================" << endl;
             cout << "================== J2n GAME SHOW ====================" << endl;
@@ -149,15 +152,16 @@ void random_question()
             char answer = _getche();
             answer = tolower(answer);
             cout << endl;
-            question_no ++;
+            question_no++;
             cek_jawaban(answer, questions[number].jawaban);
             break;
         }
+    }
 }
 
-void cek_jawaban(char answer, char jawaban_benar) 
+void cek_jawaban(char answer, char JawabanBenar) 
 {
-    if (answer == jawaban_benar)
+    if (answer == JawabanBenar) 
     {
         cout << " Selamat...! Jawabannya kamu benar" << endl;
         cout << " Kamu dapat " << question_value << "koin" << endl;
@@ -214,6 +218,7 @@ void hasil()
     double percentage;
     percentage = jawaban_benar*10;
     system("cls");
+
     cout << "=====================================================" << endl;
     cout << "====================== HASIL ========================" << endl;
     cout << "=====================================================" << endl;
@@ -222,7 +227,7 @@ void hasil()
     cout << "Jawaban Yang salah: \t\t\t" << jawaban_salah << endl << endl;
     cout << "Rata-rata: \t\t\t" << percentage << "%" << endl << endl;
 
-    if(cash>=0)
+    if (cash >= 0)
         cout << "Poin Yang Didapatkan: \t\t\tkoin" << cash << endl << endl;
     else
         cout << "Poin Yang Hangus: \t\t\tkoin" << cash << endl << endl;
@@ -234,9 +239,12 @@ void hasil()
     cout << "============== PRESS ANY KEY TO CONTINUE ============" << endl;
     cout << "=====================================================" << endl;
     _getch();
+
+    saveResultsToFile();
+
 }
 
-void rules();
+void rules()
 {
     cout << "=====================================================" << endl;
     cout << "====================== PERATURAN ====================" << endl;
@@ -252,12 +260,37 @@ void rules();
     cout << " 09. Tekan H untuk Pay HALF dan SKIP" << endl << endl;
     cout << " 10. Tekan L untuk Leave Question" << endl << endl;
     cout << " 11. Tekan A / B / C / D untuk menjawab pertanyaan" << endl << endl;
-    cout << " ===================================================== " << endl:
+    cout << " ===================================================== " << endl;
     cout << " ============= PRESS ANY KEY TO CONTINUE ============= " << endl;
-    cout << " ===================================================== " << endl:
+    cout << " ===================================================== " << endl;
     _getch();
 }
 
+void saveResultsToFile() 
+{
+    ofstream outputFile("hasil.txt");
 
+    if (outputFile.is_open()) {
+        outputFile << "=====================================================" << endl;
+        outputFile << "====================== HASIL ========================" << endl;
+        outputFile << "=====================================================" << endl;
+        outputFile << "Nama Pemain: \t\t\t" << player << endl << endl;
+        outputFile << "Jawaban Yang Benar: \t\t\t" << jawaban_benar << endl << endl;
+        outputFile << "Jawaban Yang salah: \t\t\t" << jawaban_salah << endl << endl;
+        double percentage = jawaban_benar * 10;
+        outputFile << "Rata-rata: \t\t\t" << percentage << "%" << endl << endl;
 
+        if (cash >= 0)
+            outputFile << "Poin Yang Didapatkan: \t\t\tkoin" << cash << endl << endl;
+        else
+            outputFile << "Poin Yang Hangus: \t\t\tkoin" << cash << endl << endl;
 
+        outputFile << "=====================================================" << endl;
+        outputFile << "=============== THANKS FOR PLAYING ^-^ ==============" << endl;
+        outputFile << "=====================================================" << endl;
+        outputFile << "=====================================================" << endl;
+        outputFile << "============== END OF RESULTS ============" << endl;
+
+        outputFile.close();
+    }
+}
